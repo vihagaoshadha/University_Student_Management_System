@@ -10,7 +10,7 @@ public class Main {
     
     public static void menu(){
         System.out.println("===== UNIVERSITY STUDENT MANAGEMENT SYSTEM =====\n\n");
-        System.out.println("1.  Add New Student");
+        System.out.println("1.  Add  Student");
         System.out.println("2.  View All Students");
         System.out.println("3.  Search Student by ID");
         System.out.println("4.  Add Course");
