@@ -1,0 +1,248 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.unistdmgtsystem;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author M9
+ */
+public class UniversityStudentManagementSystem {
+    ArrayList<Student> students = new ArrayList<>();
+    ArrayList<Course> courses = new ArrayList<>();
+    ArrayList<Result> results = new ArrayList<>();
+    
+    Scanner scanner = new Scanner(System.in);
+    
+    public void addStudent(){
+        System.out.println("\n===== ADD NEW STUDENT =====");
+       
+        //------------------------------------------------------------
+        System.out.println("Enter Student ID :");
+        String studentId =scanner.nextLine();
+        
+        // validation.. check " is the studentId empty ?"
+        if(studentId.isEmpty()){
+            System.out.println("Student id cannot be empty");
+        }
+        
+       //------------------------------------------------------------
+        System.out.println("Enter registration Number :");
+        String registrationNumber =scanner.nextLine();
+        
+        // validation..
+        if(registrationNumber.isEmpty()){
+            System.out.println("registration Number cannot be empty");
+        }  
+        
+       //------------------------------------------------------------
+        System.out.println("Enter index Number :");
+        String indexNumber =scanner.nextLine();
+        
+        // validation..
+        if(indexNumber.isEmpty()){
+            System.out.println("index Number cannot be empty");
+        } 
+
+       //------------------------------------------------------------
+        System.out.println("Enter Full Name :");
+        String Name =scanner.nextLine();
+        
+        // validation..
+        if(Name.isEmpty()){
+            System.out.println("Name cannot be empty");
+            return;
+        } 
+        
+       //------------------------------------------------------------
+        System.out.println("Enter Email :");
+        String email =scanner.nextLine();
+        
+        // validation..
+        if(email.isEmpty()){
+            System.out.println("Email cannot be empty");
+            return;
+        }         
+       
+       //------------------------------------------------------------       
+        System.out.println("Enter degree Program  :");
+        String degreeProgram =scanner.nextLine();
+        
+        // validation..
+        if(degreeProgram.isEmpty()){
+            System.out.println("degree Program cannot be empty");
+            return;
+        }   
+        
+        //------------------------------------------------------------------------
+        System.out.println("Enter Current Year  :");
+        int currentYear;
+        currentYear = scanner.nextInt();
+        if(0>currentYear || 5<currentYear){
+             System.out.println("Current Year must be between 1-4");
+        }
+        
+        //-------------------------------------------------------------------------
+        int currentSemester;
+        System.out.println("Enter current Semester :");
+        currentSemester = scanner.nextInt();
+        if(0>currentSemester || 3<=currentSemester){
+             System.out.println("current Semester must be between 1-2");
+        }
+        
+        // save data into arraylist
+         students.add(new Student(studentId,registrationNumber,indexNumber,Name,degreeProgram,currentYear,currentSemester,email));
+    }
+    
+          // to view all students in student arrayList 
+    public void viewAllStudents(){
+        System.out.println("\n===== ALL STUDENTS =====");
+        if(students.isEmpty()){
+            System.out.println("No Students");
+        }
+        System.out.println("Total number of students is "+students.size());
+        for(Student s : students){
+            s.generateReport();
+            System.out.println("\n");
+        }
+    }
+
+
+    
+    public void searchStudentById(){
+        System.out.println("\n===== SEARCH STUDENT =====");
+        System.out.println("Enter Student ID : ");
+        String id= scanner.nextLine();
+        Student found = findStudentById(id);
+        
+        if(found == null){
+            System.out.println("Student ID "+id+" not found.");
+        }
+        else{
+            System.out.println("Student Found: ");
+            found.generateReport();
+        }    
+    }
+    
+    
+    public void addCourse(){
+        System.out.println("\n===== ADD NEW COURSE =====");
+        
+        System.out.println("Enter Course Code : ");
+        String code = scanner.nextLine();
+        if(code.isEmpty()){
+            System.out.println("Course code cannot be Empty");
+            return;
+        }
+        if(findCoursebyCode(code) != null){
+            System.out.println("Course code "+code+" already exists.");
+        }
+        
+        //-------------------------------------------------------------------------------
+        
+        System.out.println("Enter Course Name :");
+        String name =scanner.nextLine();
+        if(name.isEmpty()){
+            System.out.println("Course Name cannot be Empty");
+            return;
+        }
+       //-----------------------------------------------------------------------------------        
+        System.out.println("Enter Credit : ");
+        int credits =0 ;
+        try{
+            credits = scanner.nextInt();
+            if(credits <=0){
+                System.out.println("credit should be greater than 0");
+                return;
+            }
+        }
+        catch(Exception e){
+            System.out.println("credit amount is not valid ");
+        }
+      //-------------------------------------------------------------------------------------  
+        System.out.println("Enter Academy Year");
+        int year = 0;
+        try{
+            year=scanner.nextInt();
+            if(year <1 || year>4 ){
+                System.out.println("Academy Year must be between (1-4)");
+                return;
+            }
+        }
+        catch(Exception e){
+            System.out.println("year is not valid ");
+        }
+        //----------------------------------------------------------------------------
+       System.out.println("Enter Academy Year");
+        int semester = 0;
+        try{
+            semester=scanner.nextInt();
+            if(semester <1 || semester>2 ){
+                System.out.println("semester must be between (1-2)");
+            }
+        }
+        catch(Exception e){
+            System.out.println("semester is not valid ");
+        }   
+        
+        
+                // save data into arrayList
+        
+        courses.add(new Course(code,name,credits,year,semester));
+    }
+        public void viewAllCourses(){
+            System.out.println("===== ALL COURSES =====");
+            if(courses.isEmpty()){
+                System.out.println("No Courses Found.");
+            }
+            for (Course c : courses){
+                c.displayDetails();
+            }
+        }
+        
+        
+        
+        
+        
+    
+    public void updateStudent(){
+          //anuradhaaa
+    }
+    public void deleteStudent(){
+         // anuradhaa
+    }
+    public void updateCourse(){
+         // chethmi
+    }
+    public void deleteCourse(){
+         // chethmi
+    }
+    public void addMarks(){
+         //  tharushi & ramudii
+    }
+    public void calculateGPA(){
+         //  vidura chathuranga
+    }
+    public void generateReport(){
+         // nadun
+    }
+    public void saveToFiles(){
+        // amantha
+    }
+    public void loadFromFiles(){
+        // amantha
+    }    
+
+    private Student findStudentById(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private Object findCoursebyCode(String code) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}
+
