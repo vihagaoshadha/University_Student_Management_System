@@ -210,10 +210,48 @@ public class UniversityStudentManagementSystem {
         
     
     public void updateStudent(){
-          //anuradhaaa
+          System.out.println("\n===== UPDATE STUDENT =====");
+          System.out.println("Enter Student ID : ");
+          String id= scanner.nextLine();
+          Student student = findStudentById(id);
+          if(student == null){
+                System.out.println("Student not found");
+                return;
+          } 
+          System.out.println("Enter new Name :");
+          String name = scanner.nextLine();
+          student.setName(name);
+
+          System.out.println("Enter new Email :");
+          String email = scanner.nextLine();
+          student.setEmail(email);
+
+          System.out.println("Enter new Degree Program :");
+          String degree = scanner.nextLine();
+          student.setDegreeProgram(degree);
+
+          System.out.println("Enter new Current Year :");
+          student.setCurrentYear(scanner.nextInt());
+
+          System.out.println("Enter Current Semester :");
+          student.setCurrentSemester(scanner.nextInt());
+          scanner.nextLine();
+
+          System.out.println("Studnet updated successfully!.");
+
     }
     public void deleteStudent(){
-         // anuradhaa
+         System.out.println("\n===== DELETE STUDENT =====");
+         System.out.println("Enter Student ID :");
+         String id = scanner.nextLine();
+         Student student = findStudentById(id);
+         if(student == null) {
+            System.out.println("Student not found.");
+            return;
+         }
+         students.remove(student);
+         System.out.println("Student deleted successfully.");
+
     }
     public void updateCourse(){
          // chethmi
@@ -238,7 +276,12 @@ public class UniversityStudentManagementSystem {
     }    
 
     private Student findStudentById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for (Student s : students) {
+                if(s.getStudentId().equals(id)) {
+                    return s;
+            }
+        }
+        return null; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     private Object findCoursebyCode(String code) {
