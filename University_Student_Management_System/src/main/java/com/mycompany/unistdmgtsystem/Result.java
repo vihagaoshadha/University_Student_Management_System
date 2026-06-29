@@ -40,4 +40,52 @@ public class Result {
         this.gradePoint   = gradePoint;
     }
     
+
+    //----Setter for marks-----
+    public void setMarks(double marks){
+
+        //----- Validate marks ------
+        if(marks<0 || marks>100){
+            System.out.println("Error! Marks should be between 0 and 100.");
+            return;
+        }
+        this.marks = marks; //set marks if valid
+
+        //----Calculate grade and grade Point based on GPACalculator class----
+
+        this.grade = GPACalculator.calculateGrade(marks);
+        this.gradePoint = GPACalculator.calculateGradePoint(marks);
+
+    }
+
+//----Getters for variables----
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public int getAcademicYear() {
+        return academicYear;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public double getMarks() {
+        return marks;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public double getGradePoint() {
+        return gradePoint;
+    }
+  
 }
