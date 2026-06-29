@@ -325,9 +325,16 @@ public class UniversityStudentManagementSystem {
     System.out.println("Course deleted successfully.");
 }
 
-    public void addMarks(){
-         //  tharushi & ramudii
-    }
+    public void addMarks(String studentId, String courseCode, String academicYear , String semester,double marks){
+
+         // check vaild marks
+
+         if (marks < 0 || marks > 100) {
+
+            System.out.println("Error : Marks must be Between 0 & 100.");
+            return;
+           }
+        }
     public void calculateGPA(){
          //  vidura chathuranga
     }
