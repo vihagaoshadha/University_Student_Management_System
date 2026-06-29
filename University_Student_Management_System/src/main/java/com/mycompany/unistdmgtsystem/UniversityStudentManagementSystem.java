@@ -334,6 +334,20 @@ public class UniversityStudentManagementSystem {
             System.out.println("Error : Marks must be Between 0 & 100.");
             return;
            }
+         // -----------------------------------------------------------------------------------
+           // check if both student exists 
+           Student Studentfound = findStudentById(studentId);
+
+           // Check if the course exists 
+           Course courseFound = findCoursebyCode(courseCode);
+           
+           // If either student or course is missing,show error
+           if (Studentfound == null || courseFound == null){
+              System.out.println("Student or Course not found in System");
+
+              return;
+        
+           }
         }
     public void calculateGPA(){
          //  vidura chathuranga
