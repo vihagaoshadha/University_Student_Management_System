@@ -348,6 +348,15 @@ public class UniversityStudentManagementSystem {
               return;
         
            }
+            //----------------------------------------------------------------------------------
+           
+           //Check if this student already has marks for this course
+           boolean isResultAlreadyExists = false;
+           if(isResultAlreadyExists){
+             System.out.println("Marks Already entered for this course.");
+             return;
+           }
+
         }
     public void calculateGPA(){
          //  vidura chathuranga
