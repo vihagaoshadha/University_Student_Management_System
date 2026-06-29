@@ -325,7 +325,8 @@ public class UniversityStudentManagementSystem {
     System.out.println("Course deleted successfully.");
 }
 
-    public void addMarks(String studentId, String courseCode, String academicYear , String semester,double marks){
+    public void addMarks(String studentId, String courseCode, String academicYear ,
+         String semester,double marks){
 
          // check vaild marks
 
@@ -351,8 +352,15 @@ public class UniversityStudentManagementSystem {
             //----------------------------------------------------------------------------------
            
            //Check if this student already has marks for this course
-           boolean isResultAlreadyExists = false;
-           if(isResultAlreadyExists){
+           boolean isDuplicate = false;
+             for( Result r : results){
+                if (r.getStudentId().equals(studentId)  &&  r.getCourseCode().equals(courseCode)) {
+                    isDuplicate = true;
+                    break;
+                }
+             }
+
+           if(isDuplicate){
              System.out.println("Marks Already entered for this course.");
              return;
            }
