@@ -88,4 +88,12 @@ public class Result {
         return gradePoint;
     }
   
+    //----Method to Convert Result object to a String
+    
+    public String toFileString() {
+        return studentId + "," + courseCode + "," + academicYear + ","
+               + semester + "," + marks + "," + grade + "," + gradePoint;
+    }
+    
+    
 }
