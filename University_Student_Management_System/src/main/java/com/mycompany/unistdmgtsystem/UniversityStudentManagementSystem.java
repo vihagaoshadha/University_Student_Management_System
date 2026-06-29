@@ -254,11 +254,77 @@ public class UniversityStudentManagementSystem {
 
     }
     public void updateCourse(){
-         // chethmi
+        
+    System.out.println("\n===== UPDATE COURSE =====");
+    
+    scanner.nextLine(); 
+
+    System.out.print("Enter Course Code : ");
+    String code = scanner.nextLine();
+
+    Course course =findCoursebyCode(code);
+
+    if (course == null) {
+        System.out.println("Course not found.");
+        return;
+    }
+
+    System.out.println("Current Course Details");
+    course.displayDetails();
+
+    System.out.print("Enter New Course Name : ");
+    String name = scanner.nextLine();
+
+    System.out.print("Enter New Credits : ");
+    int credits = scanner.nextInt();
+
+    System.out.print("Enter New Academic Year : ");
+    int year = scanner.nextInt();
+
+    System.out.print("Enter New Semester : ");
+    int semester = scanner.nextInt();
+    if (credits <= 0) {
+        System.out.println("Credits must be greater than 0.");
+        return;
+    }
+
+    if (year < 1 || year > 4) {
+        System.out.println("Academic Year must be between 1 and 4.");
+        return;
+    }
+
+    if (semester < 1 || semester > 2) {
+        System.out.println("Semester must be between 1 and 2.");
+        return;
+    }
+
+    course.setCourseName(name);
+    course.setCredits(credits);
+    course.setAcademicYear(year);
+    course.setSemester(semester);
+
+    System.out.println("Course updated successfully.");
+
     }
     public void deleteCourse(){
-         // chethmi
+
+    System.out.println("\n===== DELETE COURSE =====");
+    scanner.nextLine(); 
+    System.out.print("Enter Course Code : ");
+    String code = scanner.nextLine();
+
+    Course course = findCoursebyCode(code);
+
+    if (course == null) {
+        System.out.println("Course not found.");
+        return;
     }
+
+    courses.remove(course);
+
+    System.out.println("Course deleted successfully.");
+}
+
     public void addMarks(){
          //  tharushi & ramudii
     }
@@ -284,8 +350,17 @@ public class UniversityStudentManagementSystem {
         return null; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private Object findCoursebyCode(String code) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private Course findCoursebyCode(String code) {
+     
+
+    for (Course c : courses) {
+        if (c.getCourseCode().equalsIgnoreCase(code)) {
+            return c;
+        }
+    }
+
+    return null;
+
     }
 }
 

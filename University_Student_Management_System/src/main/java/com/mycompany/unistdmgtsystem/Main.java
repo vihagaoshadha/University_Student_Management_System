@@ -15,13 +15,14 @@ public class Main {
         System.out.println("3.  Search Student by ID");
         System.out.println("4.  Add Course");
         System.out.println("5.  View All Courses");
-        System.out.println("6.  Add Marks for a Student");
-        System.out.println("7.  Calculate Grade");
-        System.out.println("8.  Generate Student Report");
-        System.out.println("9.  Save Data to Files");
-        System.out.println("10. Load Data from Files");
-        System.out.println("11. Exit\n");
-        
+        System.out.println("6.  Update Course");
+        System.out.println("7.  Delete Course");
+        System.out.println("8.  Add Marks for a Student");
+        System.out.println("9.  Calculate Grade");
+        System.out.println("10. Generate Student Report");
+        System.out.println("11. Save Data to Files");
+        System.out.println("12. Load Data from Files");
+        System.out.println("13. Exit");
     }
     
     
@@ -59,24 +60,45 @@ public class Main {
                         uni1.viewAllCourses();
                         
                         break;
-                    case 6: 
+
+                    case 6:
+                         uni1.updateCourse();
+
+                         break;
+
+                    case 7:
+                        uni1.deleteCourse();
+
+                        break;
+
+                    case 8:
                         uni1.addMarks();
-                        
+
                         break;
-                    case 7: 
+
+                    case 9:
                         uni1.calculateGPA();
+
                         break;
-                    case 8: 
+
+                    case 10:
                         uni1.generateReport();
+
                         break;
-                    case 9: 
+
+                    case 11:
                         uni1.saveToFiles();
+
                         break;
-                    case 10: 
+
+                    case 12:
                         uni1.loadFromFiles();
+
                         break;
-                    case 11: 
+
+                    case 13:
                         menuLoop = false;
+                        
                         break;
                         
                         
