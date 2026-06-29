@@ -365,7 +365,18 @@ public class UniversityStudentManagementSystem {
              return;
            }
 
+            //---------------------------------------------------------------------------------
+             
+            //  Save the results to the system
+            System.out.println(" Validation Successful. Saving marks...");
+            
+            // create a new Result object and add it to the list
+            results.add(new Result(studentId,courseFound,marks));
+
+            System.out.println("Marks Added Successfully");
         }
+
+        
     public void calculateGPA(){
          //  vidura chathuranga
     }
