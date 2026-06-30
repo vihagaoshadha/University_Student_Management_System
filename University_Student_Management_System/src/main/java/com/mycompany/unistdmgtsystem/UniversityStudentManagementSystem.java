@@ -325,9 +325,58 @@ public class UniversityStudentManagementSystem {
     System.out.println("Course deleted successfully.");
 }
 
-    public void addMarks(){
-         //  tharushi & ramudii
-    }
+    public void addMarks(String studentId, String courseCode, String academicYear ,
+         String semester,double marks){
+
+         // check vaild marks
+
+         if (marks < 0 || marks > 100) {
+
+            System.out.println("Error : Marks must be Between 0 & 100.");
+            return;
+           }
+         // -----------------------------------------------------------------------------------
+           // check if both student exists 
+           Student Studentfound = findStudentById(studentId);
+
+           // Check if the course exists 
+           Course courseFound = findCoursebyCode(courseCode);
+           
+           // If either student or course is missing,show error
+           if (Studentfound == null || courseFound == null){
+              System.out.println("Student or Course not found in System");
+
+              return;
+        
+           }
+            //----------------------------------------------------------------------------------
+           
+           //Check if this student already has marks for this course
+           boolean isDuplicate = false;
+             for( Result r : results){
+                if (r.getStudentId().equals(studentId)  &&  r.getCourseCode().equals(courseCode)) {
+                    isDuplicate = true;
+                    break;
+                }
+             }
+
+           if(isDuplicate){
+             System.out.println("Marks Already entered for this course.");
+             return;
+           }
+
+            //---------------------------------------------------------------------------------
+             
+            //  Save the results to the system
+            System.out.println(" Validation Successful. Saving marks...");
+            
+            // create a new Result object and add it to the list
+            results.add(new Result(studentId,courseFound,marks));
+
+            System.out.println("Marks Added Successfully");
+        }
+
+        
     public void calculateGPA(){
          //  vidura chathuranga
     }
