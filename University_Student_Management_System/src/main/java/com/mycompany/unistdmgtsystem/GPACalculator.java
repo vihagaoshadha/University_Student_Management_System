@@ -4,6 +4,8 @@
  */
 package com.mycompany.unistdmgtsystem;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author M9
@@ -50,7 +52,86 @@ public class GPACalculator {
         else
             return 0.0;
     }
+// Semester GPA
+    public static double calculateSemesterGPA(ArrayList<Result> results,
+                                              ArrayList<Course> courses,
+                                              String studentId,
+                                              int year,
+                                              int semester) {
 
+        double totalPoints = 0;
+        int totalCredits = 0;
+
+        for (Result r : results) {
+
+            if (r.getStudentId().equals(studentId)
+                    && r.getAcademicYear() == year
+                    && r.getSemester() == semester) {
+
+                for (Course c : courses) {
+
+                    if (c.getCourseCode().equals(r.getCourseCode())) {
+
+                        totalPoints += r.getGradePoint() * c.getCredits();
+                        totalCredits += c.getCredits();
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (totalCredits == 0) {
+            return 0;
+        }
+
+        return totalPoints / totalCredits;
+    }
+
+    // Overall GPA
+    public static double calculateOverallGPA(ArrayList<Result> results,
+                                             ArrayList<Course> courses,
+                                             String studentId) {
+
+        double totalPoints = 0;
+        int totalCredits = 0;
+
+        for (Result r : results) {
+
+            if (r.getStudentId().equals(studentId)) {
+
+                for (Course c : courses) {
+
+                    if (c.getCourseCode().equals(r.getCourseCode())) {
+
+                        totalPoints += r.getGradePoint() * c.getCredits();
+                        totalCredits += c.getCredits();
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (totalCredits == 0) {
+            return 0;
+        }
+
+        return totalPoints / totalCredits;
+    }
+
+    // Academic Standing
+    public static String getAcademicStanding(double gpa) {
+
+        if (gpa >= 3.70)
+            return "First Class";
+        else if (gpa >= 3.30)
+            return "Second Upper";
+        else if (gpa >= 3.00)
+            return "Second Lower";
+        else if (gpa >= 2.00)
+            return "General Pass";
+        else
+            return "Academic Warning";
+    }
 }
 
 
