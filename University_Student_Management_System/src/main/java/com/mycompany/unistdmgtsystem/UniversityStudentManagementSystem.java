@@ -325,10 +325,22 @@ public class UniversityStudentManagementSystem {
     System.out.println("Course deleted successfully.");
 }
 
-    public void addMarks(String studentId, String courseCode, String academicYear ,
-         String semester,double marks){
+    public void addMarks(){
+       
+        System.out.println("------Add Marks-----");
+         
+        //Get Inputs from user
+          System.out.println("Enter Student ID:");
+          String studentId = scanner.nextLine();
+         
+          System.out.println("Enter Course Code:");
+          String courseCode = scanner.nextLine();
 
-         // check vaild marks
+          System.out.println("Enter Marks:");
+          double marks = scanner.nextDouble();
+         //------------------------------------------------------------------------------------
+
+        // check vaild marks
 
          if (marks < 0 || marks > 100) {
 
