@@ -390,7 +390,48 @@ public class UniversityStudentManagementSystem {
 
         
     public void calculateGPA(){
-         //  vidura chathuranga
+         Scanner sc = new Scanner(System.in);
+
+    System.out.println("\n===== GPA Calculation =====");
+
+    System.out.print("Enter Student ID: ");
+    String studentId = sc.nextLine();
+
+    Student student = findStudentById(studentId);
+
+    if (student == null) {
+        System.out.println("Student not found!");
+        return;
+    }
+
+    System.out.print("Enter Academic Year: ");
+    int year = sc.nextInt();
+
+    System.out.print("Enter Semester: ");
+    int semester = sc.nextInt();
+
+    double semesterGPA = GPACalculator.calculateSemesterGPA(
+            results,
+            courses,
+            studentId,
+            year,
+            semester);
+
+    double overallGPA = GPACalculator.calculateOverallGPA(
+            results,
+            courses,
+            studentId);
+
+    System.out.println("\n========== GPA RESULT ==========");
+    System.out.println("Student ID        : " + student.getStudentId());
+    System.out.println("Student Name      : " + student.getName());
+    System.out.println("Degree Program    : " + student.getDegreeProgram());
+    System.out.println("Academic Year     : " + year);
+    System.out.println("Semester          : " + semester);
+    System.out.printf("Semester GPA      : %.2f%n", semesterGPA);
+    System.out.printf("Overall GPA       : %.2f%n", overallGPA);
+    System.out.println("Academic Standing : "
+            + GPACalculator.getAcademicStanding(overallGPA));
     }
     public void generateReport(){
          // nadun
