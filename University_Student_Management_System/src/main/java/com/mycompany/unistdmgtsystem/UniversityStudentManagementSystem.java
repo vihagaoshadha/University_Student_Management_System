@@ -433,20 +433,95 @@ public class UniversityStudentManagementSystem {
     System.out.println("Academic Standing : "
             + GPACalculator.getAcademicStanding(overallGPA));
     }
-    public void generateReport(){
-         System.out.println("\n===GENERATE STUDENT ACADEMIC REPORT===");
-         System.out.println("Enter Student ID: ");
-         String studentId = scanner.nextLine().trim();
-         
-         //filtering: find the Student in System(validation)
-          Student student = findStudentById(studentId);
-          if(student == null){
-              System.out.println("Error: Student with ID " + studentId + "not found!");
-              return;
-          }
-          // 2. FILTERING: Filter only the results of this specific student from all system results
-          
-      }
+    public void generateReport() {
+        System.out.println("\n===== GENERATE STUDENT ACADEMIC REPORT =====");
+        System.out.print("Enter Student ID: ");
+        String studentId = scanner.nextLine().trim();
+
+        // 1. FILTERING: Check if the student actually exists in the system registry
+        Student student = findStudentById(studentId);
+        if (student == null) {
+            System.out.println("Error: Student with ID " + studentId + " not found!");
+            return;
+        }
+
+        // 2. FILTERING: Filter only the results of this specific student from all system results
+        ArrayList<Result> studentResults = new ArrayList<>();
+        for (Result r : results) {
+            if (r.getStudentId().equalsIgnoreCase(studentId)) {
+                studentResults.add(r);
+            }
+        }
+
+        // If no exam results are found, stop generating the report here
+        if (studentResults.isEmpty()) {
+            System.out.println("\nNo exam results found for this student yet.");
+            return;
+        }
+
+        // 3. REPORT OUTPUT: Printing the header and core student bio information
+        System.out.println("\n=======================================================================================");
+        System.out.println("=====                         STUDENT ACADEMIC REPORT                             =====");
+        System.out.println("=======================================================================================");
+        System.out.println("Student ID\t\t: " + student.getStudentId());
+        System.out.println("Registration No\t: " + student.getRegistrationNumber());
+        System.out.println("Index No\t\t: " + student.getIndexNumber());
+        System.out.println("Name\t\t\t: " + student.getName());
+        System.out.println("Degree Program\t: " + student.getDegreeProgram());
+        System.out.println("Email\t\t\t: " + student.getEmail());
+
+        int totalCreditsCompleted = 0;
+
+        // 4. MULTI-LEVEL FILTERING: Loop through years (1-4) and semesters (1-2) to split the results
+        for (int year = 1; year <= 4; year++) {
+            for (int semester = 1; semester <= 2; semester++) {
+                
+                // Filtering current loop's year and semester exam results
+                ArrayList<Result> termResults = new ArrayList<>();
+                for (Result r : studentResults) {
+                    if (r.getAcademicYear() == year && r.getSemester() == semester) {
+                        termResults.add(r);
+                    }
+                }
+
+              
+                if (!termResults.isEmpty()) {
+                    System.out.println("\nYear " + year + " - Semester " + semester);
+                    System.out.println("---------------------------------------------------------------------------------------");
+                    System.out.println("Course Code\tCourse Name\t\t\tCredits\tMarks\tGrade\tGP");
+                    System.out.println("---------------------------------------------------------------------------------------");
+
+                    for (Result r : termResults) {
+                        // FILTERING COURSE DATA: Map and fetch course details using the unique course code
+                        Course course = findCoursebyCode(r.getCourseCode());
+                        String courseName = (course != null) ? course.getCourseName() : "Unknown Course";
+                        int credits = (course != null) ? course.getCredits() : 0;
+                        
+                        if (course != null) {
+                            totalCreditsCompleted += credits;
+                        }
+
+                        // Printing student result row with clean tab spacing
+                        System.out.println(r.getCourseCode() + "\t" + courseName + "\t\t\t" + credits + "\t" + r.getMarks() + "\t" + r.getGrade() + "\t" + r.getGradePoint());
+                    }
+                    
+                    // Fetching the calculated term GPA from the shared GPACalculator utility class
+                    double semesterGPA = GPACalculator.calculateSemesterGPA(results, courses, studentId, year, semester);
+                    System.out.println("Semester GPA       : " + String.format("%.2f", semesterGPA));
+                }
+            }
+        }
+
+        // 5. FINAL SUMMARY: Generate and output the overall degree statistics summary boundary
+        System.out.println("---------------------------------------------------------------------------------------");
+        double overallGPA = GPACalculator.calculateOverallGPA(results, courses, studentId);
+        String standing = GPACalculator.getAcademicStanding(overallGPA);
+
+        System.out.println("Overall GPA        : " + String.format("%.2f", overallGPA));
+        System.out.println("Total Credits      : " + totalCreditsCompleted);
+        System.out.println("Academic Standing  : " + standing);
+        System.out.println("=======================================================================================");
+    }
     public void saveToFiles(){
         // amantha
     }
