@@ -434,8 +434,19 @@ public class UniversityStudentManagementSystem {
             + GPACalculator.getAcademicStanding(overallGPA));
     }
     public void generateReport(){
+         System.out.println("\n===GENERATE STUDENT ACADEMIC REPORT===");
+         System.out.println("Enter Student ID: ");
+         String studentId = scanner.nextLine().trim();
          
-    }
+         //filtering: find the Student in System(validation)
+          Student student = findStudentById(studentId);
+          if(student == null){
+              System.out.println("Error: Student with ID " + studentId + "not found!");
+              return;
+          }
+          // 2. FILTERING: Filter only the results of this specific student from all system results
+          
+      }
     public void saveToFiles(){
         // amantha
     }
