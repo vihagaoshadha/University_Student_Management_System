@@ -31,6 +31,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner=new Scanner(System.in);
         UniversityStudentManagementSystem uni1= new UniversityStudentManagementSystem();
+
+        //Load existing student data to arraylist students from students.txt file
+        uni1.students=FileManager.retriveStudentData();
                          // menu
         int choice=1;
         boolean menuLoop =true;

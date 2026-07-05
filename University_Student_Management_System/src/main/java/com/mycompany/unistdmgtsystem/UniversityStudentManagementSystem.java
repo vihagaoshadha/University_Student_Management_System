@@ -100,6 +100,9 @@ public class UniversityStudentManagementSystem {
     
           // to view all students in student arrayList 
     public void viewAllStudents(){
+        //Load existing data from students.txt file
+        students=FileManager.retriveStudentData();
+
         System.out.println("\n===== ALL STUDENTS =====");
         if(students.isEmpty()){
             System.out.println("No Students");
@@ -114,6 +117,9 @@ public class UniversityStudentManagementSystem {
 
     
     public void searchStudentById(){
+        //Load existing data from students.txt file
+        students=FileManager.retriveStudentData();
+        
         System.out.println("\n===== SEARCH STUDENT =====");
         System.out.println("Enter Student ID : ");
         String id= scanner.nextLine();
