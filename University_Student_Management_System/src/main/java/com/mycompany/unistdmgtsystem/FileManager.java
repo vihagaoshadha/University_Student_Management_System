@@ -5,8 +5,10 @@
 package com.mycompany.unistdmgtsystem;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -48,5 +50,18 @@ public class FileManager {
             return students;
         }
 
+    }
+
+    public static void storeStudentData(ArrayList<Student> students){
+        //Write data to the file using BufferedWriter
+        try (BufferedWriter studentData=new BufferedWriter(new FileWriter("students.txt"))) {
+            for(Student student:students){
+                //Write student data to the file by getting student objects one by one from arraylist students
+                studentData.write(student.getStudentId()+","+student.getRegistrationNumber()+","+student.getIndexNumber()+","+student.getName()+","+student.getDegreeProgram()+","+student.getCurrentYear()+","+student.getCurrentSemester()+","+student.getEmail());
+                studentData.newLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Student Data writing error...");
+        }
     }
 }

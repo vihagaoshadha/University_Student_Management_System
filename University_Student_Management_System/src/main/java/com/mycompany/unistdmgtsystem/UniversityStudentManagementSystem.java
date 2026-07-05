@@ -19,6 +19,9 @@ public class UniversityStudentManagementSystem {
     Scanner scanner = new Scanner(System.in);
     
     public void addStudent(){
+        //Load existing data from students.txt file
+        students=FileManager.retriveStudentData();
+
         System.out.println("\n===== ADD NEW STUDENT =====");
        
         //------------------------------------------------------------
@@ -96,6 +99,9 @@ public class UniversityStudentManagementSystem {
         
         // save data into arraylist
          students.add(new Student(studentId,registrationNumber,indexNumber,Name,degreeProgram,currentYear,currentSemester,email));
+
+         //store student data in the students.txt file
+         FileManager.storeStudentData(students);
     }
     
           // to view all students in student arrayList 
@@ -216,6 +222,9 @@ public class UniversityStudentManagementSystem {
         
     
     public void updateStudent(){
+            //Load existing data from students.txt file
+            students=FileManager.retriveStudentData();
+
           System.out.println("\n===== UPDATE STUDENT =====");
           System.out.println("Enter Student ID : ");
           String id= scanner.nextLine();
@@ -243,10 +252,16 @@ public class UniversityStudentManagementSystem {
           student.setCurrentSemester(scanner.nextInt());
           scanner.nextLine();
 
+          //store student data in students.txt file
+          FileManager.storeStudentData(students);
+
           System.out.println("Studnet updated successfully!.");
 
     }
     public void deleteStudent(){
+        //Load existing data from students.txt file
+        students=FileManager.retriveStudentData();
+
          System.out.println("\n===== DELETE STUDENT =====");
          System.out.println("Enter Student ID :");
          String id = scanner.nextLine();
@@ -256,6 +271,10 @@ public class UniversityStudentManagementSystem {
             return;
          }
          students.remove(student);
+
+        //store student data in students.txt file
+        FileManager.storeStudentData(students);
+
          System.out.println("Student deleted successfully.");
 
     }
