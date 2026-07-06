@@ -16,6 +16,8 @@ import java.util.ArrayList;
  * @author M9
  */
 public class FileManager {
+
+    //--------------Student--------------------------------
     public static ArrayList<Student> retriveStudentData() {
         ArrayList<Student> students=new ArrayList<>();
         try {
@@ -63,5 +65,33 @@ public class FileManager {
         } catch (Exception e) {
             System.out.println("Student Data writing error...");
         }
+    }
+
+    //----------------Course------------------
+    public static ArrayList<Course> retrieveCourseData() {
+        ArrayList<Course> courses=new ArrayList<>();
+        try {
+            //Create courses.txt
+            File courseFile = new File("courses.txt");
+            courseFile.createNewFile();
+            //Read data from file using BufferedReader
+            try (BufferedReader courseData = new BufferedReader(new FileReader("courses.txt"))) {
+                String line;
+                //Read whole file line by line
+                while ((line = courseData.readLine()) != null) {
+                    //Data of a one line are seperated to subparts appropriately
+                    String[] lineParts = line.split(",");
+                    //Create & add course object to arraylist courses
+                    courses.add(new Course(lineParts[0], lineParts[1], Integer.parseInt(lineParts[2]), Integer.parseInt(lineParts[3]), Integer.parseInt(lineParts[4])));
+                }
+            } catch (Exception exception) {
+                System.out.println("Course Data loading error...");
+            }
+        } catch (Exception exception) {
+            System.out.println("Course File creating error...");
+        } finally {
+            return courses;
+        }
+
     }
 }

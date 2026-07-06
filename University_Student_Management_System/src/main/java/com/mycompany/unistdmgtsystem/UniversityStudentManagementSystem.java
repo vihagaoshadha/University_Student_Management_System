@@ -142,6 +142,9 @@ public class UniversityStudentManagementSystem {
     
     
     public void addCourse(){
+        //Load existing data from courses.txt file
+        courses=FileManager.retrieveCourseData();
+
         System.out.println("\n===== ADD NEW COURSE =====");
         
         System.out.println("Enter Course Code : ");
@@ -207,6 +210,9 @@ public class UniversityStudentManagementSystem {
         courses.add(new Course(code,name,credits,year,semester));
     }
         public void viewAllCourses(){
+            //Load existing data from courses.txt file
+            courses=FileManager.retrieveCourseData();
+
             System.out.println("===== ALL COURSES =====");
             if(courses.isEmpty()){
                 System.out.println("No Courses Found.");
@@ -279,6 +285,8 @@ public class UniversityStudentManagementSystem {
 
     }
     public void updateCourse(){
+        //Load existing data from courses.txt file
+        courses=FileManager.retrieveCourseData();
         
     System.out.println("\n===== UPDATE COURSE =====");
     
@@ -332,6 +340,8 @@ public class UniversityStudentManagementSystem {
 
     }
     public void deleteCourse(){
+        //Load existing data from courses.txt file
+        courses=FileManager.retrieveCourseData();
 
     System.out.println("\n===== DELETE COURSE =====");
     scanner.nextLine(); 

@@ -34,6 +34,9 @@ public class Main {
 
         //Load existing student data to arraylist students from students.txt file
         uni1.students=FileManager.retriveStudentData();
+        //Load existing course data to arraylist courses from courses.txt file
+        uni1.courses=FileManager.retrieveCourseData();
+
                          // menu
         int choice=1;
         boolean menuLoop =true;
