@@ -94,4 +94,17 @@ public class FileManager {
         }
 
     }
+
+    public static void storeCourseData(ArrayList<Course> courses){
+        //Write data to the file using BufferedWriter
+        try (BufferedWriter courseData=new BufferedWriter(new FileWriter("courses.txt"))) {
+            for(Course course:courses){
+                //Write course data to the file by getting course objects one by one from arraylist courses
+                courseData.write(course.getCourseCode()+","+course.getCourseName()+","+course.getCredits()+","+course.getAcademicYear()+","+course.getSemester());
+                courseData.newLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Course Data writing error...");
+        }
+    }
 }

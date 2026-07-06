@@ -208,6 +208,9 @@ public class UniversityStudentManagementSystem {
                 // save data into arrayList
         
         courses.add(new Course(code,name,credits,year,semester));
+        //store course data in the courses.txt file
+         FileManager.storeCourseData(courses);
+
     }
         public void viewAllCourses(){
             //Load existing data from courses.txt file
@@ -290,7 +293,6 @@ public class UniversityStudentManagementSystem {
         
     System.out.println("\n===== UPDATE COURSE =====");
     
-    scanner.nextLine(); 
 
     System.out.print("Enter Course Code : ");
     String code = scanner.nextLine();
@@ -336,6 +338,9 @@ public class UniversityStudentManagementSystem {
     course.setAcademicYear(year);
     course.setSemester(semester);
 
+    //store course data in the courses.txt file
+    FileManager.storeCourseData(courses);
+
     System.out.println("Course updated successfully.");
 
     }
@@ -356,6 +361,9 @@ public class UniversityStudentManagementSystem {
     }
 
     courses.remove(course);
+
+    //store course data in the courses.txt file
+    FileManager.storeCourseData(courses);
 
     System.out.println("Course deleted successfully.");
 }
