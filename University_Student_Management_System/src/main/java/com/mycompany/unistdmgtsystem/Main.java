@@ -36,6 +36,8 @@ public class Main {
         uni1.students=FileManager.retriveStudentData();
         //Load existing course data to arraylist courses from courses.txt file
         uni1.courses=FileManager.retrieveCourseData();
+        //Load existing results to arraylist results from results.txt file
+        uni1.results=FileManager.retrieveResults();
 
                          // menu
         int choice=1;

@@ -107,4 +107,32 @@ public class FileManager {
             System.out.println("Course Data writing error...");
         }
     }
+
+    //---------------Results---------------------
+    public static ArrayList<Result> retrieveResults() {
+        ArrayList<Result> results=new ArrayList<>();
+        try {
+            //Create results.txt
+            File resultFile = new File("results.txt");
+            resultFile.createNewFile();
+            //Read data from file using BufferedReader
+            try (BufferedReader resultData = new BufferedReader(new FileReader("results.txt"))) {
+                String line;
+                //Read whole file line by line
+                while ((line = resultData.readLine()) != null) {
+                    //Data of a one line are seperated to subparts appropriately
+                    String[] lineParts = line.split(",");
+                    //Create & add result object to arraylist results
+                    results.add(new Result(lineParts[0], lineParts[1],Integer.parseInt(lineParts[2]), Integer.parseInt(lineParts[3]), Double.parseDouble(lineParts[4]), lineParts[5], Double.parseDouble(lineParts[6])));
+                }
+            } catch (Exception exception) {
+                System.out.println("Results loading error...");
+            }
+        } catch (Exception exception) {
+            System.out.println("Result File creating error...");
+        } finally {
+            return results;
+        }
+
+    }
 }
