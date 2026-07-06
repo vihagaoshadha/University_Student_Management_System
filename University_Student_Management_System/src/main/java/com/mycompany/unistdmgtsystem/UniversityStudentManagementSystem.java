@@ -428,6 +428,9 @@ public class UniversityStudentManagementSystem {
             // create a new Result object and add it to the list
             results.add(new Result(studentId,courseFound,marks));
 
+            //store results in the results.txt file
+            FileManager.storeResults(results);
+
             System.out.println("Marks Added Successfully");
         }
 

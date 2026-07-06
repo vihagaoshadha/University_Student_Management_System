@@ -133,6 +133,18 @@ public class FileManager {
         } finally {
             return results;
         }
+    }
 
+    public static void storeResults(ArrayList<Result> results){
+        //Write data to the file using BufferedWriter
+        try (BufferedWriter resultData=new BufferedWriter(new FileWriter("results.txt"))) {
+            for(Result result:results){
+                //Write results to the file by getting result objects one by one from arraylist results
+                resultData.write(result.getStudentId()+","+result.getCourseCode()+","+result.getAcademicYear()+","+result.getSemester()+","+result.getMarks()+","+result.getGrade()+","+result.getGradePoint());
+                resultData.newLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Results writing error...");
+        }
     }
 }
