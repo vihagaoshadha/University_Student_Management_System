@@ -19,10 +19,13 @@ public class UniversityStudentManagementSystem {
     Scanner scanner = new Scanner(System.in);
     
     public void addStudent(){
+        //Load existing data from students.txt file
+        students=FileManager.retriveStudentData();
+
         System.out.println("\n===== ADD NEW STUDENT =====");
        
         //------------------------------------------------------------
-        System.out.println("Enter Student ID :");
+        System.out.print("Enter Student ID :");
         String studentId =scanner.nextLine();
         
         // validation.. check " is the studentId empty ?"
@@ -31,7 +34,7 @@ public class UniversityStudentManagementSystem {
         }
         
        //------------------------------------------------------------
-        System.out.println("Enter registration Number :");
+        System.out.print("Enter registration Number :");
         String registrationNumber =scanner.nextLine();
         
         // validation..
@@ -40,7 +43,7 @@ public class UniversityStudentManagementSystem {
         }  
         
        //------------------------------------------------------------
-        System.out.println("Enter index Number :");
+        System.out.print("Enter index Number :");
         String indexNumber =scanner.nextLine();
         
         // validation..
@@ -49,7 +52,7 @@ public class UniversityStudentManagementSystem {
         } 
 
        //------------------------------------------------------------
-        System.out.println("Enter Full Name :");
+        System.out.print("Enter Full Name :");
         String Name =scanner.nextLine();
         
         // validation..
@@ -59,7 +62,7 @@ public class UniversityStudentManagementSystem {
         } 
         
        //------------------------------------------------------------
-        System.out.println("Enter Email :");
+        System.out.print("Enter Email :");
         String email =scanner.nextLine();
         
         // validation..
@@ -69,7 +72,7 @@ public class UniversityStudentManagementSystem {
         }         
        
        //------------------------------------------------------------       
-        System.out.println("Enter degree Program  :");
+        System.out.print("Enter degree Program  :");
         String degreeProgram =scanner.nextLine();
         
         // validation..
@@ -79,7 +82,7 @@ public class UniversityStudentManagementSystem {
         }   
         
         //------------------------------------------------------------------------
-        System.out.println("Enter Current Year  :");
+        System.out.print("Enter Current Year  :");
         int currentYear;
         currentYear = scanner.nextInt();
         if(0>currentYear || 5<currentYear){
@@ -88,7 +91,7 @@ public class UniversityStudentManagementSystem {
         
         //-------------------------------------------------------------------------
         int currentSemester;
-        System.out.println("Enter current Semester :");
+        System.out.print("Enter current Semester :");
         currentSemester = scanner.nextInt();
         if(0>currentSemester || 3<=currentSemester){
              System.out.println("current Semester must be between 1-2");
@@ -96,10 +99,16 @@ public class UniversityStudentManagementSystem {
         
         // save data into arraylist
          students.add(new Student(studentId,registrationNumber,indexNumber,Name,degreeProgram,currentYear,currentSemester,email));
+
+         //store student data in the students.txt file
+         FileManager.storeStudentData(students);
     }
     
           // to view all students in student arrayList 
     public void viewAllStudents(){
+        //Load existing data from students.txt file
+        students=FileManager.retriveStudentData();
+
         System.out.println("\n===== ALL STUDENTS =====");
         if(students.isEmpty()){
             System.out.println("No Students");
@@ -114,8 +123,11 @@ public class UniversityStudentManagementSystem {
 
     
     public void searchStudentById(){
+        //Load existing data from students.txt file
+        students=FileManager.retriveStudentData();
+        
         System.out.println("\n===== SEARCH STUDENT =====");
-        System.out.println("Enter Student ID : ");
+        System.out.print("Enter Student ID : ");
         String id= scanner.nextLine();
         Student found = findStudentById(id);
         
@@ -130,9 +142,12 @@ public class UniversityStudentManagementSystem {
     
     
     public void addCourse(){
+        //Load existing data from courses.txt file
+        courses=FileManager.retrieveCourseData();
+
         System.out.println("\n===== ADD NEW COURSE =====");
         
-        System.out.println("Enter Course Code : ");
+        System.out.print("Enter Course Code : ");
         String code = scanner.nextLine();
         if(code.isEmpty()){
             System.out.println("Course code cannot be Empty");
@@ -144,14 +159,14 @@ public class UniversityStudentManagementSystem {
         
         //-------------------------------------------------------------------------------
         
-        System.out.println("Enter Course Name :");
+        System.out.print("Enter Course Name :");
         String name =scanner.nextLine();
         if(name.isEmpty()){
             System.out.println("Course Name cannot be Empty");
             return;
         }
        //-----------------------------------------------------------------------------------        
-        System.out.println("Enter Credit : ");
+        System.out.print("Enter Credit : ");
         int credits =0 ;
         try{
             credits = scanner.nextInt();
@@ -164,7 +179,7 @@ public class UniversityStudentManagementSystem {
             System.out.println("credit amount is not valid ");
         }
       //-------------------------------------------------------------------------------------  
-        System.out.println("Enter Academy Year");
+        System.out.print("Enter Academic Year : ");
         int year = 0;
         try{
             year=scanner.nextInt();
@@ -177,7 +192,7 @@ public class UniversityStudentManagementSystem {
             System.out.println("year is not valid ");
         }
         //----------------------------------------------------------------------------
-       System.out.println("Enter Academy Year");
+       System.out.print("Enter Semester : ");
         int semester = 0;
         try{
             semester=scanner.nextInt();
@@ -193,8 +208,14 @@ public class UniversityStudentManagementSystem {
                 // save data into arrayList
         
         courses.add(new Course(code,name,credits,year,semester));
+        //store course data in the courses.txt file
+         FileManager.storeCourseData(courses);
+
     }
         public void viewAllCourses(){
+            //Load existing data from courses.txt file
+            courses=FileManager.retrieveCourseData();
+
             System.out.println("===== ALL COURSES =====");
             if(courses.isEmpty()){
                 System.out.println("No Courses Found.");
@@ -210,39 +231,48 @@ public class UniversityStudentManagementSystem {
         
     
     public void updateStudent(){
+            //Load existing data from students.txt file
+            students=FileManager.retriveStudentData();
+
           System.out.println("\n===== UPDATE STUDENT =====");
-          System.out.println("Enter Student ID : ");
+          System.out.print("Enter Student ID : ");
           String id= scanner.nextLine();
           Student student = findStudentById(id);
           if(student == null){
                 System.out.println("Student not found");
                 return;
           } 
-          System.out.println("Enter new Name :");
+          System.out.print("Enter new Name :");
           String name = scanner.nextLine();
           student.setName(name);
 
-          System.out.println("Enter new Email :");
+          System.out.print("Enter new Email :");
           String email = scanner.nextLine();
           student.setEmail(email);
 
-          System.out.println("Enter new Degree Program :");
+          System.out.print("Enter new Degree Program :");
           String degree = scanner.nextLine();
           student.setDegreeProgram(degree);
 
-          System.out.println("Enter new Current Year :");
+          System.out.print("Enter new Current Year :");
           student.setCurrentYear(scanner.nextInt());
 
-          System.out.println("Enter Current Semester :");
+          System.out.print("Enter Current Semester :");
           student.setCurrentSemester(scanner.nextInt());
           scanner.nextLine();
 
-          System.out.println("Studnet updated successfully!.");
+          //store student data in students.txt file
+          FileManager.storeStudentData(students);
+
+          System.out.println("Student updated successfully!.");
 
     }
     public void deleteStudent(){
+        //Load existing data from students.txt file
+        students=FileManager.retriveStudentData();
+
          System.out.println("\n===== DELETE STUDENT =====");
-         System.out.println("Enter Student ID :");
+         System.out.print("Enter Student ID :");
          String id = scanner.nextLine();
          Student student = findStudentById(id);
          if(student == null) {
@@ -250,14 +280,19 @@ public class UniversityStudentManagementSystem {
             return;
          }
          students.remove(student);
+
+        //store student data in students.txt file
+        FileManager.storeStudentData(students);
+
          System.out.println("Student deleted successfully.");
 
     }
     public void updateCourse(){
+        //Load existing data from courses.txt file
+        courses=FileManager.retrieveCourseData();
         
     System.out.println("\n===== UPDATE COURSE =====");
     
-    scanner.nextLine(); 
 
     System.out.print("Enter Course Code : ");
     String code = scanner.nextLine();
@@ -303,13 +338,18 @@ public class UniversityStudentManagementSystem {
     course.setAcademicYear(year);
     course.setSemester(semester);
 
+    //store course data in the courses.txt file
+    FileManager.storeCourseData(courses);
+
     System.out.println("Course updated successfully.");
 
     }
     public void deleteCourse(){
+        //Load existing data from courses.txt file
+        courses=FileManager.retrieveCourseData();
 
     System.out.println("\n===== DELETE COURSE =====");
-    scanner.nextLine(); 
+     
     System.out.print("Enter Course Code : ");
     String code = scanner.nextLine();
 
@@ -322,6 +362,9 @@ public class UniversityStudentManagementSystem {
 
     courses.remove(course);
 
+    //store course data in the courses.txt file
+    FileManager.storeCourseData(courses);
+
     System.out.println("Course deleted successfully.");
 }
 
@@ -330,13 +373,13 @@ public class UniversityStudentManagementSystem {
         System.out.println("------Add Marks-----");
          
         //Get Inputs from user
-          System.out.println("Enter Student ID:");
+          System.out.print("Enter Student ID:");
           String studentId = scanner.nextLine();
          
-          System.out.println("Enter Course Code:");
+          System.out.print("Enter Course Code:");
           String courseCode = scanner.nextLine();
 
-          System.out.println("Enter Marks:");
+          System.out.print("Enter Marks:");
           double marks = scanner.nextDouble();
          //------------------------------------------------------------------------------------
 
@@ -384,6 +427,9 @@ public class UniversityStudentManagementSystem {
             
             // create a new Result object and add it to the list
             results.add(new Result(studentId,courseFound,marks));
+
+            //store results in the results.txt file
+            FileManager.storeResults(results);
 
             System.out.println("Marks Added Successfully");
         }
@@ -522,13 +568,7 @@ public class UniversityStudentManagementSystem {
         System.out.println("Academic Standing  : " + standing);
         System.out.println("=======================================================================================");
     }
-    public void saveToFiles(){
-        // amantha
-    }
-    public void loadFromFiles(){
-        // amantha
-    }    
-
+    
     private Student findStudentById(String id) {
         for (Student s : students) {
                 if(s.getStudentId().equals(id)) {
